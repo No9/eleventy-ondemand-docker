@@ -24,13 +24,15 @@ module.exports = function(configData) {
 const downloadFile = (params) => {
     return new Promise((resolve, reject) => {
         var AWS = require('aws-sdk');
-
-        var s3  = new AWS.S3({
-                accessKeyId: process.env.S3ACCESSKEY ,
-                secretAccessKey: process.env.S3SECRET ,
-                endpoint: process.env.S3ENDPOINT ,
-                signatureVersion: 'v4'
-        });
+        // if(process.env.S3FORCEPATH=="1") {
+            var s3  = new AWS.S3({
+                    accessKeyId: process.env.S3ACCESSKEY ,
+                    secretAccessKey: process.env.S3SECRET ,
+                    endpoint: process.env.S3ENDPOINT ,
+                    s3ForcePathStyle: true,
+                    signatureVersion: 'v4'
+            });
+        
         s3.getObject(params, function(err, data) {
             // Handle any error 
             if (err)
