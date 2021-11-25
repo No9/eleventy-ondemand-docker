@@ -42,10 +42,14 @@ Based on this project https://github.com/SomeAnticsDev/eleventy-serverless-color
 
 1. Run the local dev service
 
+    ```
     npm run dev
-
+    ```
 1. Open a browser to see the output
-    http://localhost:8080/1/ or http://localhost:8080/2/
+
+    http://localhost:8080/1/
+
+    http://localhost:8080/2/
 
 ## Step 3. Create container
 
