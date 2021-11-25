@@ -105,5 +105,9 @@ Based on this project https://github.com/SomeAnticsDev/eleventy-serverless-color
 
 ## credits
 Sample data from Nolan Lawson
+
 https://github.com/nolanlawson/starwars-data/blob/master/people.json
 
+Sample project from Ben Myers
+
+https://github.com/SomeAnticsDev/eleventy-serverless-color-contrast
