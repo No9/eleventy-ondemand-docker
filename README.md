@@ -1,2 +1,76 @@
-# eleventy-ondemand-knative
-A project to demonstrate using 11ty serverless in knative backed by s3
+# eleventy-ondemand-docker
+
+A project to demonstrate using 11ty serverless in docker to generate on demand content where the data is stored in s3.
+
+This is intended to be used in scenarios where a container environment is available to the user but not public cloud access.
+
+Based on this project https://github.com/SomeAnticsDev/eleventy-serverless-color-contrast
+
+## steps
+
+1. Create an s3 bucket on your favourite cloud provider and copy the contents of sample data to it.
+
+1. Copy the contents of the folder `sampledata` to the s3 bucket
+
+1. Create some credentials for the bucket.
+
+1. Then and create a .env file in the base folder of this project with the following entries.
+
+    Replacing the XXXX with the vaules from the credentials you created.
+
+    ```
+    S3ACCESSKEY=XXXX
+    S3SECRET=XXXX
+    S3BUCKETNAME=XXXX
+    S3ENDPOINT=XXXX
+    ```
+
+1. Build the container
+
+    ```
+    docker build -t eleventy-ondemand-docker .
+    ```
+
+1. Run the container
+    ```
+    docker run -p 8080:8080 --env-file .env eleventy-ondemand-docker
+    ```
+
+1. Test the endpoint
+
+    ```
+    curl -s -d '{ "path" : "/1/" }' http://localhost:8080/2015-03-31/functions/function/invocations
+
+    {"statusCode":200,
+    "headers":{"Content-Type":"text/html; charset=UTF-8"},
+    "body":"\n\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n\t<meta charset=\"UTF-8\">\n\t
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n\t
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\t
+    <title>Document</title>\n</head>\n<body>\n\t\t
+    <h1>1 - Luke Skywalker</h1>\n\t\tbirth_year : 19BBY <br />\n\t\t
+    gender : male <br/>\n\t\t
+    hair_color : blond\n\t<br/>\n\t
+    <h3>Base Data :</h3>\n\t
+    {\"birth_year\":\"19BBY\",\"created\":\"2014-12-09T13:50:51.644000Z\",
+    \"edited\":\"2014-12-20T21:17:56.891000Z\",\"eye_color\":\"blue\",
+    \"films\":[\"http://swapi.co/api/films/6/\",\"http://swapi.co/api/films/3/\",
+    \"http://swapi.co/api/films/2/\",\"http://swapi.co/api/films/1/\",
+    \"http://swapi.co/api/films/7/\"],
+    \"gender\":\"male\",\"hair_color\":\"blond\",\"height\":\"172\",
+    \"homeworld\":\"http://swapi.co/api/planets/1/\",\"id\":1,\"mass\":\"77\",
+    \"name\":\"Luke Skywalker\",\"skin_color\":\"fair\"}\n\t
+    <main>\n\t\t<p>eleventy.serverless : {\"path\":{\"coreid\":\"1\"}}</p>\n\t
+    </main>\n</body>\n</html>\n"}
+    ```
+
+## notes
+
+The docker file performs a double copy of the code to the root - `/var/task` and to `/var/task/knative/functions/ondemand`.
+This is to factilitate this facilitate the default aws lambda container and the 11ty default config.
+
+There is probably an opportunity to streamline this in someway.
+
+## credits
+Sample data from Nolan Lawson
+https://github.com/nolanlawson/starwars-data/blob/master/people.json
+

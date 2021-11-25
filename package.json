@@ -1,0 +1,32 @@
+{
+  "name": "eleventy-ondemand-knative",
+  "version": "1.0.0",
+  "description": "a sample 11ty app in knative",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "eleventy",
+    "dev": "eleventy --serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/No9/eleventy-ondemand-knative.git"
+  },
+  "keywords": [
+    "11ty",
+    "knative"
+  ],
+  "author": "anton whalley",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@11ty/eleventy": "1.0.0-beta.7",
+    "@netlify/functions": "^0.7.2",
+    "aws-sdk": "^2.1036.0",
+    "color-contrast": "^1.0.0",
+    "dotenv": "^10.0.0",
+    "node-fetch": "^3.1.0"
+  },
+  "bugs": {
+    "url": "https://github.com/No9/eleventy-ondemand-knative/issues"
+  },
+  "homepage": "https://github.com/No9/eleventy-ondemand-knative#readme"
+}

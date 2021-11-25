@@ -1,0 +1,29 @@
+---
+permalink:
+  ondemand: /:coreid/
+eleventyComputed:
+  coreid: "{{ eleventy.serverless.path.coreid }}"
+---
+{{ coreid | log }}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+		<h1>{{ globaldata.id }} - {{globaldata.name}}</h1>
+		birth_year : {{ globaldata.birth_year}} <br />
+		gender : {{ globaldata.gender  }} <br/>
+		hair_color : {{ globaldata.hair_color  }}
+	<br/>
+	<h3>Base Data :</h3>
+	{{globaldata | json }}
+	<main>
+		<p>eleventy.serverless : {{eleventy.serverless | json }}</p>
+	</main>
+</body>
+</html>
