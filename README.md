@@ -14,7 +14,7 @@ Based on this project https://github.com/SomeAnticsDev/eleventy-serverless-color
     ```
     git clone eleventy-serverless-docker
     ```
-1. Create an s3 bucket on your favourite cloud provider and copy the contents of sample data to it.
+1. Create an s3 bucket on your favourite cloud provider.
 
 1. Copy the contents of the folder `sampledata` to the s3 bucket
 
