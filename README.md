@@ -1,4 +1,4 @@
-# eleventy-ondemand-docker
+# eleventy-serverless-docker
 
 A project to demonstrate using 11ty serverless in docker to generate on demand content where the data is stored in s3.
 
@@ -7,6 +7,11 @@ This is intended to be used in scenarios where a container environment is availa
 Based on this project https://github.com/SomeAnticsDev/eleventy-serverless-color-contrast
 
 ## steps
+
+1. Clone this repository
+    ```
+    git clone eleventy-serverless-docker
+    ```
 
 1. Create an s3 bucket on your favourite cloud provider and copy the contents of sample data to it.
 
@@ -28,12 +33,12 @@ Based on this project https://github.com/SomeAnticsDev/eleventy-serverless-color
 1. Build the container
 
     ```
-    docker build -t eleventy-ondemand-docker .
+    docker build -t eleventy-serverless-docker .
     ```
 
 1. Run the container
     ```
-    docker run -p 8080:8080 --env-file .env eleventy-ondemand-docker
+    docker run -p 8080:8080 --env-file .env eleventy-serverless-docker
     ```
 
 1. Test the endpoint
@@ -65,10 +70,14 @@ Based on this project https://github.com/SomeAnticsDev/eleventy-serverless-color
 
 ## notes
 
-The docker file performs a double copy of the code to the root - `/var/task` and to `/var/task/knative/functions/ondemand`.
-This is to factilitate this facilitate the default aws lambda container and the 11ty default config.
+1. The docker file performs a double copy of the code to the root - `/var/task` and to `/var/task/knative/functions/ondemand`.
+    This is to factilitate the default aws lambda container and the 11ty default config.
 
-There is probably an opportunity to streamline this in someway.
+    There is probably an opportunity to streamline this in someway.
+
+1. The body in the return value needs to be transformed into a HTML response by a downstream system.
+    This is usually done but using the `context.succeed(html);` in the lambda function but the `context` object is not available in the local 11ty serverless environment.
+    Going to look at how this can be done in nginx or cloudflare.
 
 ## credits
 Sample data from Nolan Lawson
