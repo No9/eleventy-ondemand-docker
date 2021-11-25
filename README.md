@@ -8,36 +8,19 @@ This project also aims to show how this approach can maintain the inner dev loop
 
 Based on this project https://github.com/SomeAnticsDev/eleventy-serverless-color-contrast
 
-## local dev loop setup 
+## Step 1. General Setup
 
 1. Clone this repository
     ```
     git clone eleventy-serverless-docker
     ```
-
-1. Install dependencies
-    ```
-    npm install 
-    ```
-
-1. Run the local dev service 
-
-    npm run dev
-
-## steps to create container
-
-1. Clone this repository
-    ```
-    git clone eleventy-serverless-docker
-    ```
-
 1. Create an s3 bucket on your favourite cloud provider and copy the contents of sample data to it.
 
 1. Copy the contents of the folder `sampledata` to the s3 bucket
 
 1. Create some credentials for the bucket.
 
-1. Then and create a .env file in the base folder of this project with the following entries.
+1. Then and create a `.env` file in the base folder of this project with the following entries.
 
     Replacing the XXXX with the vaules from the credentials you created.
 
@@ -47,6 +30,24 @@ Based on this project https://github.com/SomeAnticsDev/eleventy-serverless-color
     S3BUCKETNAME=XXXX
     S3ENDPOINT=XXXX
     ```
+
+
+## Step 2. local dev loop setup 
+
+
+1. Install dependencies
+    ```
+    npm install
+    ```
+
+1. Run the local dev service
+
+    npm run dev
+
+1. Open a browser to see the output
+    http://localhost:8080/1/ or http://localhost:8080/2/
+
+## Step 3. Create container
 
 1. Build the container
 
