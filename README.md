@@ -2,11 +2,29 @@
 
 A project to demonstrate using 11ty serverless in docker to generate on demand content where the data is stored in s3.
 
-This is intended to be used in scenarios where a container environment is available to the user but not public cloud access.
+This is intended to be used in scenarios where a container environment is available to the developer but not public cloud access. 
+
+This project also aims to show how this approach can maintain the inner dev loop as well as a deployment folow.
 
 Based on this project https://github.com/SomeAnticsDev/eleventy-serverless-color-contrast
 
-## steps
+## local dev loop setup 
+
+1. Clone this repository
+    ```
+    git clone eleventy-serverless-docker
+    ```
+
+1. Install dependencies
+    ```
+    npm install 
+    ```
+
+1. Run the local dev service 
+
+    npm run dev
+
+## steps to create container
 
 1. Clone this repository
     ```
@@ -75,9 +93,10 @@ Based on this project https://github.com/SomeAnticsDev/eleventy-serverless-color
 
     There is probably an opportunity to streamline this in someway.
 
-1. The body in the return value needs to be transformed into a HTML response by a downstream system.
-    This is usually done but using the `context.succeed(html);` in the lambda function but the `context` object is not available in the local 11ty serverless environment.
-    Going to look at how this can be done in nginx or cloudflare.
+1. When ran in lambda the response is a JSON object. 
+    The body in the return value needs to be transformed into a HTML response by a downstream system.
+    When hosted on netlify this is the CDN so we need to find an equivalent approach using either nginx or cloudflare.
+    In lambda this is usually done but using the `context.succeed(html);` but the `context` object is not available in the local 11ty serverless environment and so the inner dev loop would break with that approach.
 
 ## credits
 Sample data from Nolan Lawson
