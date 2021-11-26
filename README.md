@@ -100,7 +100,7 @@ Based on this project https://github.com/SomeAnticsDev/eleventy-serverless-color
 
 1. When ran in lambda container the response is a JSON object.
     The body in the return value needs to be transformed into a HTML response by a downstream system.
-    When hosted on netlify the CDN performs this function so we need to find an equivalent approach using either nginx or cloudflare.
+    When hosted on netlify the CDN performs this function probably through the API gateway so we need to find an equivalent approach using either nginx or cloudflare.
     In lambda this is usually done but using the `context.succeed(html);` but the `context` object is not available in the local 11ty serverless environment and so the inner dev loop would break with that approach.
 
 ## credits

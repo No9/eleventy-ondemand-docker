@@ -14,9 +14,8 @@ exports.handler = async (event, context) => {
   });
   try {
     let [page] = await elev.getOutput();
-  if (context) {
-    context.succeed(page.content);
-  } else {
+    console.log(page.content);
+    
     return {
       statusCode: 200,
       headers: {
@@ -24,7 +23,7 @@ exports.handler = async (event, context) => {
       },
       body: page.content,
     };
-  }
+  
   } catch (error) {
     // Only console log for matching serverless paths
     // (otherwise you’ll see a bunch of BrowserSync 404s for non-dynamic URLs during --serve)
