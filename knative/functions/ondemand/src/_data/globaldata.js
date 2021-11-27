@@ -13,8 +13,6 @@ module.exports = function(configData) {
         return
     }
     coreid = coreid + '.json';
-    console.log("getting ", coreid);
-
 
     var params = {Bucket: process.env.S3BUCKETNAME, Key: coreid};
 
@@ -32,9 +30,9 @@ const downloadFile = (params) => {
                     s3ForcePathStyle: true,
                     signatureVersion: 'v4'
             });
-        
+
         s3.getObject(params, function(err, data) {
-            // Handle any error 
+            // Handle any error
             if (err)
             {
                 console.log(err);
@@ -42,7 +40,6 @@ const downloadFile = (params) => {
             }
             let objectData = data.Body.toString('utf-8'); // Use the encoding necessary
             let retVal = JSON.parse(objectData);
-            console.log(retVal.id);
             resolve(retVal);
         });
     });
