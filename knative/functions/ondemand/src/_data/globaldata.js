@@ -22,7 +22,6 @@ module.exports = function(configData) {
 const downloadFile = (params) => {
     return new Promise((resolve, reject) => {
         var AWS = require('aws-sdk');
-        // if(process.env.S3FORCEPATH=="1") {
             var s3  = new AWS.S3({
                     accessKeyId: process.env.S3ACCESSKEY ,
                     secretAccessKey: process.env.S3SECRET ,
